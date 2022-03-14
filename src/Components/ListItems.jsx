@@ -41,18 +41,22 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <Inventory />
-      </ListItemIcon>
-      <ListItemText primary="Stocks" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <GroupRounded />
-      </ListItemIcon>
-      <ListItemText primary="Users" />
-    </ListItemButton>
+    <Link to="/admin/stocks" style={{ textDecoration: "none", color: "black" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <Inventory />
+        </ListItemIcon>
+        <ListItemText primary="Stocks" />
+      </ListItemButton>
+    </Link>
+    <Link to="/admin/users" style={{ textDecoration: "none", color: "black" }}>
+      <ListItemButton>
+        <ListItemIcon>
+          <GroupRounded />
+        </ListItemIcon>
+        <ListItemText primary="Users" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );
 

@@ -1,13 +1,13 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   getDonationsPerStatus,
   updateDonationStatus,
 } from "../../Services/Donation";
 import CircularIndeterminate from "../CircularProgress";
-import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { Box } from "@mui/material";
-import { FoodBankRounded } from "@mui/icons-material";
+import Appbar from "./Appbar";
 
 const columns = [
   {
@@ -144,10 +144,10 @@ const columns = [
 ];
 
 export default function DataTable() {
-  const [loading, setLoading] = React.useState(true);
-  const [donations, setDonations] = React.useState([]);
+  const [loading, setLoading] = useState(true);
+  const [donations, setDonations] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const status = ["Pending", "Accepted"];
     getDonationsPerStatus(status).then((response) => {
       const donations = response.data.value;
@@ -165,24 +165,8 @@ export default function DataTable() {
     <CircularIndeterminate />
   ) : (
     <>
-      <AppBar position="static" elevation={0}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <FoodBankRounded />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Receive Donations
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
-      <div style={{ height: 400, width: "100%" }}>
+      <Appbar />
+      <div style={{ height: 600, width: "100%" }}>
         <DataGrid
           rows={donations}
           columns={columns}
