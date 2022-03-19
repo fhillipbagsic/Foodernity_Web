@@ -44,6 +44,8 @@ const columns = [
 
 function StocksTable() {
   const [selected, setSelected] = useState([]);
+  const [selectedCFD, setSelectedCFD] = useState("");
+  const [selectedCFDItems, setSelectedCFDItems] = useState([]);
   const [IDs, setIDs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [value, setValue] = useState(0);
@@ -158,6 +160,8 @@ function StocksTable() {
             const { _id, title, items } = item;
 
             const onClick = async () => {
+              setSelectedCFD(_id);
+              setSelectedCFDItems(items);
               openSecondFormRef.current.openForm();
             };
             return (
@@ -183,17 +187,17 @@ function StocksTable() {
                     rowsPerPageOptions={[5]}
                   />
                 </div>
-                <SecondForm
-                  ref={openSecondFormRef}
-                  _id={_id}
-                  selected={items}
-                />
               </React.Fragment>
             );
           })}
         </TabPanel>
       </Box>
       <Form ref={openFormRef} ids={IDs} />
+      <SecondForm
+        ref={openSecondFormRef}
+        _id={selectedCFD}
+        selected={selectedCFDItems}
+      />
     </>
   );
 }

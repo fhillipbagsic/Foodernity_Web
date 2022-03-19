@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 const URL = "http://localhost:3001/";
-// const URL = "http://foodernity-server.herokuapp.com/";
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

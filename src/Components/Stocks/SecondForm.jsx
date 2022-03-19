@@ -7,7 +7,12 @@ import React, {
 import Button from "@mui/material/Button";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent, TextField } from "@mui/material";
+import {
+  DialogActions,
+  DialogContent,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import Loading from "../Loading";
 import { LocalizationProvider, MobileDatePicker } from "@mui/lab";
@@ -27,11 +32,13 @@ const SecondForm = forwardRef((props, ref) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(props.selected);
+  console.log(props._id);
   const onSubmit = async (data) => {
     data._id = props._id;
     data.selected = props.selected;
-    console.log(data);
+    data.title = props.title;
+
     loadingRef.current.openLoading();
     setOpen(false);
     releaseCallForDonation(data).then((response) => {
@@ -41,21 +48,12 @@ const SecondForm = forwardRef((props, ref) => {
         console.log(response.data["value"]);
       }
     });
-    //   data.selected = props.ids;
-    //   loadingRef.current.openLoading();
-    //   setOpen(false);
-    //   releaseDonation(data).then((response) => {
-    //     if (response.data["status"] === "ok") {
-    //       setTimeout(() => window.location.reload(), 0);
-    //     } else {
-    //       console.log(response.data["value"]);
-    //     }
-    //   });
   };
   return (
     <>
       <Dialog open={open} fullWidth={true} maxWidth="xs">
         <DialogTitle>Release Call for Donations</DialogTitle>
+
         <DialogContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
