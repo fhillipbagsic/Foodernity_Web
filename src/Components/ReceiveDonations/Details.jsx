@@ -1,100 +1,97 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import PersonIcon from "@mui/icons-material/Person";
-import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
-import { blue } from "@mui/material/colors";
-
-const emails = ["username@gmail.com", "user02@gmail.com"];
+import { DialogContent, Divider, Grid } from "@mui/material";
 
 function SimpleDialog(props) {
-  const { onClose, selectedValue, open } = props;
-
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
+  const { onClose, details, open } = props;
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
-      <List sx={{ pt: 0 }}>
-        {emails.map((email) => (
-          <ListItem
-            button
-            onClick={() => handleListItemClick(email)}
-            key={email}
-          >
-            <ListItemAvatar>
-              <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={email} />
-          </ListItem>
-        ))}
-
-        <ListItem
-          autoFocus
-          button
-          onClick={() => handleListItemClick("addAccount")}
-        >
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Add account" />
-        </ListItem>
-      </List>
+    <Dialog open={open} fullWidth={true} maxWidth="sm" onClose={onClose}>
+      <DialogTitle>Donation Details</DialogTitle>
+      <DialogContent dividers>
+        <Grid container>
+          <Grid item xs={12}>
+            <img
+              src={details.donationImage}
+              alt="donation"
+              style={{ height: "30vh", objectFit: "contain", width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              <span style={{ fontWeight: "bold" }}>Donation:</span>{" "}
+              {details.donationName}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider sx={{ marginY: ".5rem" }} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography sx={{ fontWeight: "bold" }}>Donor's name:</Typography>
+            <Typography>{details.fullName}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography sx={{ fontWeight: "bold" }}>
+              Donor's Email Address:
+            </Typography>
+            <Typography>{details.emailAddress}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography sx={{ fontWeight: "bold" }}>Status:</Typography>
+            <Typography>{details.status}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider sx={{ marginY: ".5rem" }} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography sx={{ fontWeight: "bold" }}>Items:</Typography>
+          </Grid>
+          <Grid container item xs={12}>
+            {details.donations.map((donation, index) => {
+              return (
+                <Grid item key={index} xs={12} sm={6}>
+                  <Typography>
+                    <span style={{ fontWeight: "bold" }}>Category: </span>
+                    {donation.foodCategory}
+                  </Typography>
+                  <Typography>
+                    <span style={{ fontWeight: "bold" }}>Quantity: </span>
+                    {donation.quantity}
+                  </Typography>
+                  <Typography>
+                    <span style={{ fontWeight: "bold" }}>Expiry Date: </span>
+                    {donation.expiryDate}
+                  </Typography>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
+      </DialogContent>
     </Dialog>
   );
 }
 
-SimpleDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
-};
-
-export default function SimpleDialogDemo() {
+export default function DonationDetails(props) {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false);
-    setSelectedValue(value);
   };
 
   return (
     <div>
-      <Typography variant="subtitle1" component="div">
-        Selected: {selectedValue}
-      </Typography>
-      <br />
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open simple dialog
+        View
       </Button>
-      <SimpleDialog
-        selectedValue={selectedValue}
-        open={open}
-        onClose={handleClose}
-      />
+      <SimpleDialog details={props.details} open={open} onClose={handleClose} />
     </div>
   );
 }

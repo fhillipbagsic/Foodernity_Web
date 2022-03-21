@@ -8,6 +8,7 @@ import CircularIndeterminate from "../CircularProgress";
 import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import Appbar from "./Appbar";
+import DonationDetails from "./Details";
 
 const columns = [
   {
@@ -131,6 +132,15 @@ const columns = [
     headerName: "View",
     sortable: false,
     width: 150,
+    disableClickEventBubbling: true,
+    renderCell: (params) => {
+      console.log(params.row);
+      return (
+        <>
+          <DonationDetails details={params.row} />
+        </>
+      );
+    },
   },
   // {
   //   field: "fullName",

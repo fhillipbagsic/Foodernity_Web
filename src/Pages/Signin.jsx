@@ -1,9 +1,10 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Avatar, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import bg from "../Assets/signup.png";
 import SigninService from "../Services/Signin";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const Signin = () => {
   const { control, handleSubmit } = useForm();
@@ -48,19 +49,25 @@ const Signin = () => {
         }}
       >
         <Grid item>
+          <Avatar sx={{ m: 3, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+        </Grid>
+        <Grid item>
           <Typography
             sx={{
               color: "rgb(33,150,243)",
               fontFamily: "Inter",
               fontSize: "1.5rem",
               fontWeight: "bold",
+              my: 1,
             }}
           >
             Sign in to Foodernity
           </Typography>
         </Grid>
         <Grid item>
-          <Typography>{signinError}</Typography>
+          <Typography sx={{ color: "red" }}>{signinError}</Typography>
         </Grid>
         <Grid item>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -119,6 +126,7 @@ const Signin = () => {
               color="primary"
               fullWidth
               size="large"
+              sx={{ my: 5 }}
             >
               Sign in
             </Button>

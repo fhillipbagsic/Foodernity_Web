@@ -170,7 +170,12 @@ function StocksTable() {
                   <Grid container>
                     <Grid item xs={12} sm={10}>
                       {" "}
-                      <Typography variant="h6">{title}</Typography>
+                      <Typography
+                        variant="h6"
+                        sx={{ color: "#1976d2", fontWeight: "bold" }}
+                      >
+                        {title}
+                      </Typography>
                     </Grid>
                     <Grid item xs={12} sm={2}>
                       <Button variant="contained" onClick={onClick}>

@@ -46,7 +46,6 @@ export default function Item(props) {
             <Button size="small" onClick={() => update("Completed")}>
               Mark as Complete
             </Button>
-            <Button size="small">View More</Button>
           </CardActions>
         </Card>
       </Grid>
