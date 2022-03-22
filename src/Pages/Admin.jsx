@@ -72,12 +72,12 @@ function Admin() {
   };
 
   useEffect(() => {
-    // authenticate().then((response) => {
-    //   console.log(response.data);
-    //   if (response.data["status"] !== "ok") {
-    //     setAuthenticated(false);
-    //   }
-    // });
+    authenticate().then((response) => {
+      console.log(response.data);
+      if (response.data["status"] !== "ok") {
+        setAuthenticated(false);
+      }
+    });
   }, []);
 
   return authenticated ? (

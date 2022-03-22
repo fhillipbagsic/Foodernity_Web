@@ -12,6 +12,7 @@ import {
   VolunteerActivismRounded,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import logout from "../Services/Logout";
 export const mainListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
@@ -68,7 +69,7 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Privacy Notice" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton onClick={logout}>
       <ListItemIcon>
         <LogoutRounded />
       </ListItemIcon>

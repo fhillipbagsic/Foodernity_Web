@@ -49,11 +49,6 @@ const Signin = () => {
         }}
       >
         <Grid item>
-          <Avatar sx={{ m: 3, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-        </Grid>
-        <Grid item>
           <Typography
             sx={{
               color: "rgb(33,150,243)",
