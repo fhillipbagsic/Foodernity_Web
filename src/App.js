@@ -5,11 +5,13 @@ import DataTable from "./Components/ReceiveDonations/DataTable";
 import CallForDonations from "./Components/CallForDonation/CallForDonations";
 import StocksTable from "./Components/Stocks/DataTable";
 import UsersTable from "./Components/Users/UsersTable";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <Routes>
-      <Route index path="/" element={<Signin />} />
+      <Route index path="/" element={<Home />} />
+      <Route path="/signin" element={<Signin />} />
       <Route path="admin" element={<Admin />}>
         <Route index element={<Navigate to="receivedonations" />} />
         <Route path="receivedonations" element={<DataTable />} />
