@@ -1,5 +1,5 @@
 import { Grid, Toolbar } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Footer from "../Components/Landing/Footer";
 import DonatingSteps from "../Components/Landing/Home/DonatingSteps";
@@ -28,6 +28,11 @@ import Overview from "../Components/Landing/OurGoal/Overview";
 function Home() {
   const [openMenu, setOpenMenu] = useState(false);
 
+  useEffect(() => {
+    fetch("https://foodernity-server.herokuapp.com/").then((response) => {
+      console.log(response);
+    });
+  }, []);
   return (
     <>
       {/* <Helmet>

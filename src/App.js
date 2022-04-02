@@ -6,12 +6,15 @@ import CallForDonations from "./Components/CallForDonation/CallForDonations";
 import StocksTable from "./Components/Stocks/DataTable";
 import UsersTable from "./Components/Users/UsersTable";
 import Home from "./Pages/Home";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 function App() {
   return (
     <Routes>
       <Route index path="/" element={<Home />} />
+      <Route path="/dataprivacy" element={<PrivacyPolicy />} />
       <Route path="/signin" element={<Signin />} />
+
       <Route path="admin" element={<Admin />}>
         <Route index element={<Navigate to="receivedonations" />} />
         <Route path="receivedonations" element={<DataTable />} />

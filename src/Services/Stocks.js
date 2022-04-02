@@ -1,6 +1,14 @@
 import axios from "axios";
 import { URL } from "..";
 
+const getStocks = async () => {
+  const response = await axios.post(URL + "getcounts", {
+    token: localStorage.getItem("token"),
+  });
+
+  return response;
+};
+
 const getStocksPerStatus = async (status) => {
   const response = await axios.post(URL + "getstocksperstatus", {
     status,
@@ -62,4 +70,9 @@ const releaseCallForDonation = async ({ _id, image, date, selected }) => {
   return response;
 };
 
-export { getStocksPerStatus, releaseDonation, releaseCallForDonation };
+export {
+  getStocks,
+  getStocksPerStatus,
+  releaseDonation,
+  releaseCallForDonation,
+};

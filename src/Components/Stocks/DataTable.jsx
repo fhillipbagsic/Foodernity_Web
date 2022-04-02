@@ -1,10 +1,18 @@
-import { Box, Button, Grid, Paper, Tab, Tabs, Typography } from "@mui/material";
-import { green } from "@mui/material/colors";
+import {
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Paper,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useRef, useState } from "react";
-import { getStocksPerStatus } from "../../Services/Stocks";
+import { getStocks, getStocksPerStatus } from "../../Services/Stocks";
 import CircularIndeterminate from "../CircularProgress";
-import Appbar from "./Appbar";
+
 import { Inventory } from "@mui/icons-material";
 import { AppBar, IconButton, Toolbar } from "@mui/material";
 import Form from "./Form";
@@ -34,7 +42,7 @@ const columns = [
     width: 200,
     renderCell: (params) => {
       const days = params.row.daysLeft;
-      const color = days < 30 ? "red" : days < 60 ? "yellow" : "green";
+      const color = days < 30 ? "red" : days < 60 ? "orange" : "green";
       return (
         <Typography sx={{ color }}>{days} days left before expiry</Typography>
       );
@@ -42,6 +50,54 @@ const columns = [
   },
 ];
 
+const columns2 = [
+  {
+    field: "id",
+    headerName: "ID",
+    width: 0,
+  },
+  {
+    field: "category",
+    headerName: "Category",
+    width: 300,
+    renderCell: (params) => {
+      const category = params.row.category;
+      const color = "";
+      return <Chip label={category} color="primary" />;
+    },
+  },
+
+  {
+    field: "received",
+    headerName: "Received",
+    width: 200,
+    renderCell: (params) => {
+      const received = params.row.received;
+      const color = "black";
+      return <Typography sx={{ color }}>{received} pc/s</Typography>;
+    },
+  },
+  {
+    field: "donated",
+    headerName: "Donated",
+    width: 200,
+    renderCell: (params) => {
+      const donated = params.row.donated;
+      const color = "black";
+      return <Typography sx={{ color }}>{donated} pc/s</Typography>;
+    },
+  },
+  {
+    field: "balance",
+    headerName: "Balance",
+    width: 200,
+    renderCell: (params) => {
+      const balance = params.row.balance;
+      const color = balance < 30 ? "red" : "green";
+      return <Typography sx={{ color }}>{balance} pc/s</Typography>;
+    },
+  },
+];
 function StocksTable() {
   const [selected, setSelected] = useState([]);
   const [selectedCFD, setSelectedCFD] = useState("");
@@ -51,6 +107,7 @@ function StocksTable() {
   const [value, setValue] = useState(0);
   const [commonDonations, setCommonDonations] = useState([]);
   const [callForDonations, setCallForDonations] = useState([]);
+  const [stocks, setStocks] = useState([]);
 
   const openFormRef = useRef(null);
   const openSecondFormRef = useRef(null);
@@ -71,6 +128,10 @@ function StocksTable() {
 
       setCommonDonations(commonDonationItems);
       setCallForDonations(callForDonationItems);
+    });
+
+    getStocks().then((response) => {
+      setStocks(response.data.value);
       setLoading(false);
     });
   }, []);
@@ -114,7 +175,7 @@ function StocksTable() {
             <Inventory />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Stockss
+            Stocks
           </Typography>
           {selected.length ? (
             <Button
@@ -139,11 +200,24 @@ function StocksTable() {
             aria-label="basic tabs example"
             variant="fullWidth"
           >
+            <Tab label="Monitoring" />
             <Tab label="Common Donations" />
             <Tab label="Call for donations" />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
+          <div style={{ height: 600, width: "100%" }}>
+            <DataGrid
+              rows={stocks}
+              columns={columns2}
+              pageSize={12}
+
+              // checkboxSelection
+              // onSelectionModelChange={(item) => setSelected(item)}
+            />
+          </div>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
           <div style={{ height: 600, width: "100%" }}>
             <DataGrid
               rows={commonDonations}
@@ -155,7 +229,7 @@ function StocksTable() {
             />
           </div>
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={2}>
           {callForDonations.map((item, index) => {
             const { _id, title, items } = item;
 
