@@ -7,6 +7,9 @@ import StocksTable from "./Components/Stocks/DataTable";
 import UsersTable from "./Components/Users/UsersTable";
 import Home from "./Pages/Home";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import QuestionsTable from "./Components/FAQs/QuestionsTable";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import GuidelinesTable from "./Components/Guidelines/GuidelinesTable";
 
 function App() {
   return (
@@ -16,11 +19,14 @@ function App() {
       <Route path="/signin" element={<Signin />} />
 
       <Route path="admin" element={<Admin />}>
-        <Route index element={<Navigate to="receivedonations" />} />
+        <Route index element={<Navigate to="dashboard" />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="receivedonations" element={<DataTable />} />
         <Route path="callfordonations" element={<CallForDonations />} />
         <Route path="stocks" element={<StocksTable />} />
         <Route path="users" element={<UsersTable />} />
+        <Route path="guidelines" element={<GuidelinesTable />} />
+        <Route path="faqs" element={<QuestionsTable />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

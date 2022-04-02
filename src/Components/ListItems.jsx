@@ -4,8 +4,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import {
+  BeenhereRounded,
+  DashboardRounded,
   FoodBankRounded,
   GroupRounded,
+  HelpRounded,
   Inventory,
   LogoutRounded,
   PrivacyTipRounded,
@@ -18,6 +21,19 @@ export const mainListItems = (
     <ListSubheader component="div" inset>
       Modules
     </ListSubheader>
+
+    <Link
+      to="/admin/dashboard"
+      style={{ textDecoration: "none", color: "black" }}
+    >
+      <ListItemButton LinkComponent={Link} href="/admin/dashboard">
+        <ListItemIcon>
+          <DashboardRounded />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+    </Link>
+
     <Link
       to="/admin/receivedonations"
       style={{ textDecoration: "none", color: "black" }}
@@ -56,6 +72,26 @@ export const mainListItems = (
           <GroupRounded />
         </ListItemIcon>
         <ListItemText primary="Users" />
+      </ListItemButton>
+    </Link>
+
+    <Link
+      to="/admin/guidelines"
+      style={{ textDecoration: "none", color: "black" }}
+    >
+      <ListItemButton LinkComponent={Link} href="/admin/guidelines">
+        <ListItemIcon>
+          <BeenhereRounded />
+        </ListItemIcon>
+        <ListItemText primary="Guidelines" />
+      </ListItemButton>
+    </Link>
+    <Link to="/admin/faqs" style={{ textDecoration: "none", color: "black" }}>
+      <ListItemButton LinkComponent={Link} href="/admin/faqs">
+        <ListItemIcon>
+          <HelpRounded />
+        </ListItemIcon>
+        <ListItemText primary="FAQs" />
       </ListItemButton>
     </Link>
   </React.Fragment>
