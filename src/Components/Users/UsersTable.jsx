@@ -30,8 +30,10 @@ const columns = [
       );
     },
   },
-  { field: "fullName", headerName: "Full Name", width: 200 },
-  { field: "emailAddress", headerName: "Email Address", width: 200 },
+  { field: "fullName", headerName: "Full Name", width: 250 },
+  { field: "emailAddress", headerName: "Email Address", width: 250 },
+  { field: "method", headerName: "Sign-up Method", width: 130 },
+  { field: "hidden", headerName: "Profile hidden", width: 130 },
   {
     field: "status",
     headerName: "Status",
@@ -106,8 +108,8 @@ function UsersTable() {
         <DataGrid
           rows={users}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+
           // checkboxSelection
         />
       </div>

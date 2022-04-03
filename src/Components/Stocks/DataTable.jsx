@@ -13,7 +13,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getStocks, getStocksPerStatus } from "../../Services/Stocks";
 import CircularIndeterminate from "../CircularProgress";
 
-import { Inventory } from "@mui/icons-material";
+import { FoodBankRounded } from "@mui/icons-material";
 import { AppBar, IconButton, Toolbar } from "@mui/material";
 import Form from "./Form";
 import SecondForm from "./SecondForm";
@@ -62,7 +62,7 @@ const columns2 = [
     width: 300,
     renderCell: (params) => {
       const category = params.row.category;
-      const color = "";
+
       return <Chip label={category} color="primary" />;
     },
   },
@@ -172,7 +172,7 @@ function StocksTable() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <Inventory />
+            <FoodBankRounded />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Stocks

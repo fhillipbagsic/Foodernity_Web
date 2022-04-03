@@ -5,11 +5,11 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import {
   BeenhereRounded,
+  CampaignRounded,
   DashboardRounded,
   FoodBankRounded,
   GroupRounded,
   HelpRounded,
-  Inventory,
   LogoutRounded,
   PrivacyTipRounded,
   VolunteerActivismRounded,
@@ -52,7 +52,7 @@ export const mainListItems = (
     >
       <ListItemButton>
         <ListItemIcon>
-          <FoodBankRounded />
+          <CampaignRounded />
         </ListItemIcon>
         <ListItemText primary="Call for Donations" />
       </ListItemButton>
@@ -61,7 +61,7 @@ export const mainListItems = (
     <Link to="/admin/stocks" style={{ textDecoration: "none", color: "black" }}>
       <ListItemButton>
         <ListItemIcon>
-          <Inventory />
+          <FoodBankRounded />
         </ListItemIcon>
         <ListItemText primary="Stocks" />
       </ListItemButton>
