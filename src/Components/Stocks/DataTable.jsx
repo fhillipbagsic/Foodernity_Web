@@ -10,7 +10,11 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useRef, useState } from "react";
-import { getStocks, getStocksPerStatus } from "../../Services/Stocks";
+import {
+  getReleasedDonations,
+  getStocks,
+  getStocksPerStatus,
+} from "../../Services/Stocks";
 import CircularIndeterminate from "../CircularProgress";
 
 import { FoodBankRounded } from "@mui/icons-material";
@@ -98,6 +102,61 @@ const columns2 = [
     },
   },
 ];
+
+const column3 = [
+  {
+    field: "id",
+    headerName: "ID",
+    width: 100,
+  },
+  {
+    field: "documentation",
+    headerName: "Image",
+    width: 70,
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    disableClickEventBubbling: true,
+    renderCell: (params) => {
+      return (
+        <img
+          src={params.row.documentation}
+          alt="donation"
+          style={{ width: "50px", height: "50px" }}
+        />
+      );
+    },
+  },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 350,
+  },
+  {
+    field: "date",
+    headerName: "Date Released",
+    width: 200,
+    renderCell: (params) => {
+      const date = new Date(params.row.date);
+      const fullDate =
+        date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+
+      return <Typography>{fullDate}</Typography>;
+    },
+  },
+  {
+    field: "beneficiaries",
+    headerName: "Beneficiaries",
+    width: 350,
+  },
+  {
+    field: "",
+    headerName: "# of Items Donated",
+    width: 150,
+    renderCell: (params) => {
+      return <Typography>{params.row.itemsDonated.length}</Typography>;
+    },
+  },
+];
 function StocksTable() {
   const [selected, setSelected] = useState([]);
   const [selectedCFD, setSelectedCFD] = useState("");
@@ -108,6 +167,7 @@ function StocksTable() {
   const [commonDonations, setCommonDonations] = useState([]);
   const [callForDonations, setCallForDonations] = useState([]);
   const [stocks, setStocks] = useState([]);
+  const [releasedDonations, setReleasedDonations] = useState([]);
 
   const openFormRef = useRef(null);
   const openSecondFormRef = useRef(null);
@@ -132,6 +192,16 @@ function StocksTable() {
 
     getStocks().then((response) => {
       setStocks(response.data.value);
+    });
+
+    getReleasedDonations().then((response) => {
+      const items = response.data.value;
+      const withid = items.map((item, index) => {
+        const { ...rest } = item;
+        return { id: index + 1, ...rest };
+      });
+      console.log(withid);
+      setReleasedDonations(withid);
       setLoading(false);
     });
   }, []);
@@ -203,6 +273,7 @@ function StocksTable() {
             <Tab label="Monitoring" />
             <Tab label="Common Donations" />
             <Tab label="Call for donations" />
+            <Tab label="Released Donations" />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -269,6 +340,15 @@ function StocksTable() {
               </React.Fragment>
             );
           })}
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <div style={{ height: 600, width: "100%" }}>
+            <DataGrid
+              rows={releasedDonations}
+              columns={column3}
+              pageSize={10}
+            />
+          </div>
         </TabPanel>
       </Box>
       <Form ref={openFormRef} ids={IDs} />

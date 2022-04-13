@@ -70,9 +70,18 @@ const releaseCallForDonation = async ({ _id, image, date, selected }) => {
   return response;
 };
 
+const getReleasedDonations = async () => {
+  const response = await axios.post(URL + "getannouncements", {
+    token: localStorage.getItem("token"),
+  });
+
+  return response;
+};
+
 export {
   getStocks,
   getStocksPerStatus,
   releaseDonation,
   releaseCallForDonation,
+  getReleasedDonations,
 };
