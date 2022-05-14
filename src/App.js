@@ -10,6 +10,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import QuestionsTable from "./Components/FAQs/QuestionsTable";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import GuidelinesTable from "./Components/Guidelines/GuidelinesTable";
+import Privacy from "./Components/PrivacyPolicy/Privacy";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="users" element={<UsersTable />} />
         <Route path="guidelines" element={<GuidelinesTable />} />
         <Route path="faqs" element={<QuestionsTable />} />
+        <Route path="privacypolicy" element={<Privacy />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

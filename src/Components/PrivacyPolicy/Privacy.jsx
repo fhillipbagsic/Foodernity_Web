@@ -1,18 +1,14 @@
 import React from "react";
-import style from "./Style.module.css";
-function PrivacyPolicy() {
+import style from "./Styles.module.css";
+function Privacy() {
   return (
     <>
       <header className={style.header}>
         <h1>Foodernity Application</h1>
-        <h2 className={style.title}>Data Privacy Policy</h2>
+        <h2 className={style.title}>Privacy Notice</h2>
         <p>Last updated on March 30, 2022</p>
       </header>
       <article>
-        {/* <nav className={style.toTop}>
-          <a href="#contents">back to top</a>
-        </nav> */}
-
         <section>
           <h1 id="personal-info">Introduction</h1>
           <h4>
@@ -29,13 +25,13 @@ function PrivacyPolicy() {
         </section>
 
         {/* <nav className={style.toTop}>
-          <a href="#contents">back to top</a>
-        </nav> */}
+      <a href="#contents">back to top</a>
+    </nav> */}
 
         <section>
           <h1 id="collection">Processing of Personal Data</h1>
 
-          <h3>A. What We Collect from Users</h3>
+          <h3>A. What The Application Collect from Users</h3>
           <h4>
             The application only collects the basic contact information of
             users. These data will only be used as the reference for the data
@@ -91,17 +87,19 @@ function PrivacyPolicy() {
 
           <h3>D.Who can Access the Collected Data</h3>
           <h4>
-            Due to the sensitive and confidential nature of the users' personal
-            data, only the admin can see the entirety of user data. The data
-            shall only be accessed through the web application and not anywhere
-            else.
+            Due to the sensitive and confidential nature of the personal data,
+            only the user can access and see their own information in the
+            application, unless they allow it to be visible to others. The
+            organization shall be allowed to access such personal data, only to
+            be used within the application only.
           </h4>
           <h3>E. Disclosure and Sharing of Data</h3>
           <h4>
-            The admin shall maintain the confidentiality and secrecy of users'
-            data by not disclosing any of it to the public. Any method of
-            sharing user data shall be prohibited. If such case happens, it will
-            be the admin's responbility to deal with the possible consequences.
+            All users shall maintain the confidentiality and secrecy of their
+            personal data that they post in the mobile application. Sharing of
+            personal account to other users shall be prohibited. If such case
+            happens, it will not be the liability of either the developers or
+            the organization to deal with to possible consequences.
           </h4>
         </section>
       </article>
@@ -109,4 +107,4 @@ function PrivacyPolicy() {
   );
 }
 
-export default PrivacyPolicy;
+export default Privacy;

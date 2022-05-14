@@ -99,12 +99,17 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <PrivacyTipRounded />
-      </ListItemIcon>
-      <ListItemText primary="Privacy Notice" />
-    </ListItemButton>
+    <Link
+      to="/admin/privacypolicy"
+      style={{ textDecoration: "none", color: "black" }}
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <PrivacyTipRounded />
+        </ListItemIcon>
+        <ListItemText primary="Privacy Notice" />
+      </ListItemButton>
+    </Link>
     <ListItemButton onClick={logout}>
       <ListItemIcon>
         <LogoutRounded />

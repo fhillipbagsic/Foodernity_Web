@@ -9,7 +9,8 @@ import Loading from "../Loading";
 import { updateCallForDonation } from "../../Services/CallForDonation";
 
 export default function Item(props) {
-  const { _id, image, title, beneficiaries, remarks } = props.data;
+  const { _id, image, title, beneficiaries, remarks, donated, status } =
+    props.data;
   const loadingRef = useRef(null);
 
   const update = (newStatus) => {
@@ -41,11 +42,32 @@ export default function Item(props) {
             <Typography variant="body2" color="text.secondary">
               {remarks}
             </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Status:{" "}
+              {donated
+                ? "Donations already released"
+                : "Donations not released yet"}
+            </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => update("Completed")}>
-              Mark as Complete
-            </Button>
+            {!donated && status === "Active" && (
+              <Button size="small" onClick={() => update("Completed")}>
+                Mark as Completed
+              </Button>
+            )}
+            {!donated && status === "Completed" && (
+              <Button size="small" onClick={() => update("Active")}>
+                Mark as Active
+              </Button>
+            )}
+            {/* {donated}
+            {donated ? (
+              <></>
+            ) : (
+              <Button size="small" onClick={() => update("Completed")}>
+                Mark as Complete
+              </Button>
+            )} */}
           </CardActions>
         </Card>
       </Grid>
