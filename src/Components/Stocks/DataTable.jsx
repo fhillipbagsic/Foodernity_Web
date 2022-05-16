@@ -21,6 +21,7 @@ import { FoodBankRounded } from "@mui/icons-material";
 import { AppBar, IconButton, Toolbar } from "@mui/material";
 import Form from "./Form";
 import SecondForm from "./SecondForm";
+import Edit from "./Edit";
 
 const columns = [
   {
@@ -97,7 +98,10 @@ const columns2 = [
     width: 200,
     renderCell: (params) => {
       const balance = params.row.balance;
-      const color = balance < 30 ? "red" : "green";
+      const color =
+        balance < Number(localStorage.getItem(params.row.category))
+          ? "red"
+          : "green";
       return <Typography sx={{ color }}>{balance} pc/s</Typography>;
     },
   },
@@ -171,6 +175,7 @@ function StocksTable() {
 
   const openFormRef = useRef(null);
   const openSecondFormRef = useRef(null);
+  const editFormRef = useRef(null);
 
   useEffect(() => {
     const status = "Inventory";
@@ -206,6 +211,22 @@ function StocksTable() {
     });
   }, []);
 
+  useEffect(() => {
+    if (!localStorage.getItem("Canned Foods")) {
+      localStorage.setItem("Canned Foods", "30");
+      localStorage.setItem("Instant Noodles", "30");
+      localStorage.setItem("Canned Fruits", "30");
+      localStorage.setItem("Canned Vegetables", "30");
+      localStorage.setItem("Eggs", "30");
+      localStorage.setItem("Rice", "30");
+      localStorage.setItem("Cereals", "30");
+      localStorage.setItem("Tea/Coffee/Milk/Sugar", "30");
+      localStorage.setItem("Biscuits", "30");
+      localStorage.setItem("Condiments and Sauces", "30");
+      localStorage.setItem("Beverages", "30");
+      localStorage.setItem("Snacks", "30");
+    }
+  }, []);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -247,7 +268,7 @@ function StocksTable() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Stocks
           </Typography>
-          {selected.length ? (
+          {selected.length && value === 1 ? (
             <Button
               color="inherit"
               onClick={() => {
@@ -259,6 +280,14 @@ function StocksTable() {
             </Button>
           ) : (
             <></>
+          )}
+          {value === 0 && (
+            <Button
+              color="inherit"
+              onClick={() => editFormRef.current.openForm()}
+            >
+              Edit
+            </Button>
           )}
         </Toolbar>
       </AppBar>
@@ -357,6 +386,7 @@ function StocksTable() {
         _id={selectedCFD}
         selected={selectedCFDItems}
       />
+      <Edit ref={editFormRef} />
     </>
   );
 }
