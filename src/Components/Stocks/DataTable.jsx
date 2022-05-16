@@ -98,10 +98,17 @@ const columns2 = [
     width: 200,
     renderCell: (params) => {
       const balance = params.row.balance;
+      console.log("test");
+      if (params.row.category === "Cereals") {
+        console.log("test");
+        console.log(balance);
+        console.log(Number(localStorage.getItem(params.row.category)));
+      }
+
       const color =
-        balance < Number(localStorage.getItem(params.row.category))
-          ? "red"
-          : "green";
+        balance > Number(localStorage.getItem(params.row.category))
+          ? "green"
+          : "red";
       return <Typography sx={{ color }}>{balance} pc/s</Typography>;
     },
   },
